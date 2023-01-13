@@ -14,9 +14,58 @@
 <script>
     const choices = ['rock', 'paper', 'scissors'];
 
-    function getComputerChoice() {
-        return choices[Math.floor(Math.random() * choices.length)]
+    function getRandomChoice() {
+        return choices[Math.floor(Math.random() * choices.length)];
     }
+
+    function getComputerChoice() {
+        return getRandomChoice();
+    }
+
+    function getPlayerChoice() {
+        const playerChoice = prompt('Choose rock, paper, or scissors').toLowerCase();
+        // check that the value is in 'choices' array
+        if (choices.includes(playerChoice)) {
+            return playerChoice;
+        } else {
+            getPlayerChoice();
+        }
+    }
+
+    function capitalize(word) {
+        return (word[0].toUpperCase() + word.slice(1))
+    }
+
+    function playRound(playerSelection, computerSelection) {
+        // check for tie
+        if (playerSelection === computerSelection) {
+            return `You tie! ${capitalize(playerSelection)} ties ${capitalize(computerSelection)}`;
+        }
+        // choose rock
+        if (playerSelection === 'rock') {
+            if (computerSelection === 'paper') {
+                return 'You lose! Paper covers Rock';
+            } else {
+                return 'You win! Rock smashes Scissors';
+            }
+            // choose paper
+        } else if (playerSelection === 'paper') {
+            if (computerSelection === 'rock') {
+                return 'You win!, Paper covers Rock';
+            } else {
+                return 'You lose! Scissors cut Paper';
+            }
+            // choose scissors
+        } else {
+            if (computerSelection === 'rock') {
+                return 'You lose, Rock smashes Scissors';
+            } else {
+                return 'You win, Scissors cut Paper';
+            }
+        }
+    }
+
+
 
 
 
