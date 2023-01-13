@@ -65,6 +65,27 @@
         }
     }
 
+    function game() {
+        let win = 0;
+        let lose = 0;
+        let tie = 0;
+
+        for (let i = 0; i < 5; i++) {
+            let msg = playRound(getPlayerChoice(), getComputerChoice());
+            if (msg.includes('win')) win++;
+            if (msg.includes('lose')) lose++;
+            if (msg.includes('tie')) tie++;
+            console.log(msg);
+        }
+
+        if (win > lose) {
+            console.log('You win the game!');
+        } else {
+            console.log('You lose the game!');
+        }
+
+        console.log(`Your record was: ${win} wins, ${lose} losses, and ${tie} ties.`)
+    }
 
 
 
