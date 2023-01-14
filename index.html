@@ -24,7 +24,7 @@
 
     function getPlayerChoice() {
         const playerChoice = prompt('Choose rock, paper, or scissors').toLowerCase();
-        // check that the value is in 'choices' array
+        // validate that the user input is in 'choices' array
         if (choices.includes(playerChoice)) {
             return playerChoice;
         } else {
@@ -45,21 +45,21 @@
         if (playerSelection === 'rock') {
             if (computerSelection === 'paper') {
                 return 'You lose! Paper covers Rock';
-            } else {
+            } else { // computerSelection === 'scissors'
                 return 'You win! Rock smashes Scissors';
             }
             // choose paper
         } else if (playerSelection === 'paper') {
             if (computerSelection === 'rock') {
                 return 'You win! Paper covers Rock';
-            } else {
+            } else { // computerSelection === 'scissors'
                 return 'You lose! Scissors cut Paper';
             }
             // choose scissors
-        } else {
+        } else { // playerSelection === 'scissors'
             if (computerSelection === 'rock') {
                 return 'You lose! Rock smashes Scissors';
-            } else {
+            } else { // computerSelection === 'paper'
                 return 'You win! Scissors cut Paper';
             }
         }
