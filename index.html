@@ -45,21 +45,21 @@
         if (playerSelection === 'rock') {
             if (computerSelection === 'paper') {
                 return 'You lose! Paper covers Rock';
-            } else { // computerSelection === 'scissors'
+            } else if (computerSelection === 'scissors') {
                 return 'You win! Rock smashes Scissors';
             }
             // choose paper
         } else if (playerSelection === 'paper') {
             if (computerSelection === 'rock') {
                 return 'You win! Paper covers Rock';
-            } else { // computerSelection === 'scissors'
+            } else if (computerSelection === 'scissors') {
                 return 'You lose! Scissors cut Paper';
             }
             // choose scissors
-        } else { // playerSelection === 'scissors'
+        } else if (playerSelection === 'scissors') {
             if (computerSelection === 'rock') {
                 return 'You lose! Rock smashes Scissors';
-            } else { // computerSelection === 'paper'
+            } else if (computerSelection === 'paper') {
                 return 'You win! Scissors cut Paper';
             }
         }
@@ -83,6 +83,7 @@
         } else {
             console.log('You lose the game!');
         }
+        if (win === lose) console.log('Tie goes to computer!')
 
         console.log(`Your record was: ${win} wins, ${lose} losses, and ${tie} ties.`)
     }
