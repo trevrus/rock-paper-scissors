@@ -9,9 +9,23 @@
 </head>
 
 <body>
-
+    <div class="btns">
+        <!-- create 3 buttons for rock, paper, scissors -->
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
 </body>
 <script>
+    const btns = document.querySelectorAll('.btns button');
+
+    btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            console.log(btn.id);
+            playRound(btn.id, getComputerChoice());
+        })
+    })
+
     const choices = ['rock', 'paper', 'scissors'];
 
     function getRandomChoice() {
