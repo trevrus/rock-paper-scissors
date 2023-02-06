@@ -15,6 +15,15 @@
         <button id="paper">Paper</button>
         <button id="scissors">Scissors</button>
     </div>
+    <div id="results">
+        <!-- display results here -->
+
+    </div>
+    <div class="score">
+        <!-- display score here -->
+        Player: <b id="playerScore">0</b>
+        Computer: <b id="computerScore">0</b>
+    </div>
 </body>
 <script>
     const btns = document.querySelectorAll('.btns button');
@@ -25,6 +34,9 @@
             playRound(btn.id, getComputerChoice());
         })
     })
+
+    let pScore = 0;
+    let cScore = 0;
 
     const choices = ['rock', 'paper', 'scissors'];
 
@@ -50,56 +62,59 @@
         return (word[0].toUpperCase() + word.slice(1))
     }
 
+    function checkForWinner() {
+        if (pScore === 5) {
+            alert('You win the game!');
+            pScore = 0;
+            cScore = 0;
+        } else if (cScore === 5) {
+            alert('You lose the game!');
+            pScore = 0;
+            cScore = 0;
+        }
+    }
+
+    function updateScore(msg) {
+        checkForWinner();
+        const playerScore = document.querySelector('#playerScore');
+        const computerScore = document.querySelector('#computerScore');
+        if (msg.includes('win')) pScore++;
+        if (msg.includes('lose')) cScore++;
+        playerScore.textContent = pScore;
+        computerScore.textContent = cScore;
+    }
+
     function playRound(playerSelection, computerSelection) {
+        let msg = '';
         // check for tie
         if (playerSelection === computerSelection) {
-            return `You tie! ${capitalize(playerSelection)} ties ${capitalize(computerSelection)}`;
+            msg = `You tie! ${capitalize(playerSelection)} ties ${capitalize(computerSelection)}`;
         }
         // choose rock
         if (playerSelection === 'rock') {
             if (computerSelection === 'paper') {
-                return 'You lose! Paper covers Rock';
+                msg = 'You lose! Paper covers Rock';
             } else if (computerSelection === 'scissors') {
-                return 'You win! Rock smashes Scissors';
+                msg = 'You win! Rock smashes Scissors';
             }
             // choose paper
         } else if (playerSelection === 'paper') {
             if (computerSelection === 'rock') {
-                return 'You win! Paper covers Rock';
+                msg = 'You win! Paper covers Rock';
             } else if (computerSelection === 'scissors') {
-                return 'You lose! Scissors cut Paper';
+                msg = 'You lose! Scissors cut Paper';
             }
             // choose scissors
         } else if (playerSelection === 'scissors') {
             if (computerSelection === 'rock') {
-                return 'You lose! Rock smashes Scissors';
+                msg = 'You lose! Rock smashes Scissors';
             } else if (computerSelection === 'paper') {
-                return 'You win! Scissors cut Paper';
+                msg = 'You win! Scissors cut Paper';
             }
         }
-    }
-
-    function game() {
-        let win = 0;
-        let lose = 0;
-        let tie = 0;
-
-        for (let i = 0; i < 5; i++) {
-            let msg = playRound(getPlayerChoice(), getComputerChoice());
-            if (msg.includes('win')) win++;
-            if (msg.includes('lose')) lose++;
-            if (msg.includes('tie')) tie++;
-            console.log(msg);
-        }
-
-        if (win > lose) {
-            console.log('You win the game!');
-        } else {
-            console.log('You lose the game!');
-        }
-        if (win === lose) console.log('Tie goes to computer!')
-
-        console.log(`Your record was: ${win} wins, ${lose} losses, and ${tie} ties.`)
+        const results = document.querySelector('#results');
+        results.textContent = msg;
+        updateScore(msg);
     }
 </script>
 
