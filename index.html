@@ -108,7 +108,9 @@
         }
         results.textContent = msg;
         updateScore(msg);
-        checkForWinner();
+        setTimeout(() => {
+            checkForWinner();
+        }, 10);
     }
 
 
