@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors</title>
 </head>
 
 <body>
@@ -27,6 +27,10 @@
 </body>
 <script>
     const btns = document.querySelectorAll('.btns button');
+    const playerScore = document.querySelector('#playerScore');
+    const computerScore = document.querySelector('#computerScore');
+    const results = document.querySelector('#results');
+
 
     btns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -40,46 +44,36 @@
 
     const choices = ['rock', 'paper', 'scissors'];
 
-    function getRandomChoice() {
-        return choices[Math.floor(Math.random() * choices.length)];
-    }
 
     function getComputerChoice() {
-        return getRandomChoice();
-    }
-
-    function getPlayerChoice() {
-        const playerChoice = prompt('Choose rock, paper, or scissors').toLowerCase();
-        // validate that the user input is in 'choices' array
-        if (choices.includes(playerChoice)) {
-            return playerChoice;
-        } else {
-            getPlayerChoice();
-        }
+        return choices[Math.floor(Math.random() * choices.length)];
     }
 
     function capitalize(word) {
         return (word[0].toUpperCase() + word.slice(1))
     }
 
+    function resetGame() {
+        pScore = 0;
+        cScore = 0;
+        playerScore.textContent = pScore;
+        computerScore.textContent = cScore;
+        results.textContent = '';
+    }
+
     function checkForWinner() {
-        if (pScore === 5) {
+        if (playerScore.textContent == 5) {
             alert('You win the game!');
-            pScore = 0;
-            cScore = 0;
-        } else if (cScore === 5) {
+            resetGame();
+        } else if (computerScore.textContent == 5) {
             alert('You lose the game!');
-            pScore = 0;
-            cScore = 0;
+            resetGame();
         }
     }
 
     function updateScore(msg) {
-        checkForWinner();
-        const playerScore = document.querySelector('#playerScore');
-        const computerScore = document.querySelector('#computerScore');
-        if (msg.includes('win')) pScore++;
-        if (msg.includes('lose')) cScore++;
+        if (msg.includes('win')) ++pScore;
+        if (msg.includes('lose')) ++cScore;
         playerScore.textContent = pScore;
         computerScore.textContent = cScore;
     }
@@ -112,10 +106,12 @@
                 msg = 'You win! Scissors cut Paper';
             }
         }
-        const results = document.querySelector('#results');
         results.textContent = msg;
         updateScore(msg);
+        checkForWinner();
     }
+
+
 </script>
 
 </html>
